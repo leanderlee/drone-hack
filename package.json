@@ -1,0 +1,23 @@
+{
+  "author": "Concerned Crocodile",
+  "name": "drone-hack",
+  "description": "CUTC Quadcopter hack",
+  "version": "0.1.0",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leanderlee/drone-hack.git"
+  },
+  "scripts": {
+    "test": "mocha -R nyan test.js"
+  },
+  "main": "app.js",
+  "dependencies": {
+    "ar-drone":         "latest"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

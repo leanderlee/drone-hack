@@ -1,0 +1,5 @@
+- drone camera to html (Dev)
+- controlling the drone (Leander)
+- opencv (JKoff)
+- graphics for game (Erica)
+- game logic and html (Paul)
