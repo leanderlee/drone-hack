@@ -69,7 +69,7 @@
 	left: 320px;
 }
 #crossHair {
-	z-index: 9999;
+	z-index: 999;
 	width: 120px;
 	height: 120px;
 	position: absolute;
@@ -78,9 +78,11 @@
 	top: 120px;
 }
 .asteroid {
-	z-index: 9999;
-	width: 50px;
-	height: 50px;
-	position: absolute;
-	background-image: url('/images/rock3.png');
+    z-index: 9999;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-image: url('/rock3.png');
+    top: 0;
+    left: 0;
 }
