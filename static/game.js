@@ -25,6 +25,7 @@ var main = (function() {
         },
         loopInterval = undefined; 
         fired = true,
+        shotsFired = 0,
         score = 0,
         time = 0,
         canvasSizeX = 500,
@@ -105,10 +106,12 @@ var main = (function() {
         //draw laser
         soundDOM.laser.currentTime = 0;
         soundDOM.laser.play();
+
         $('#laserR').show().stop().css("opacity", 1);
         $('#laserL').show().stop().css("opacity", 1);
         $('#laserR').animate({ opacity: 0 }, 1000);
         $('#laserL').animate({ opacity: 0 }, 1000);
+        shotsFired += 1;
 
         for (var id in asteroids) {
             var ast = asteroids[id];
@@ -154,11 +157,13 @@ var main = (function() {
     },
     endGame = function() { //returns final game score
         clearInterval(loopInterval); 
-        $.trigger('gameOver');
-        return score/time;
+        canvas.trigger('gameOver');
     },
     getStats = function () {
         return {
+            score: score,
+            time: time,
+            shotFired: shotsFired,
         };
     };
 
@@ -174,4 +179,7 @@ var main = (function() {
 $(function() {
     //Testing. Draw red square, listen for click event, react
     main.init();
+    $('body').bind('gameOver', function() {
+       console.log('GAMEOVER'); 
+    });
 });
