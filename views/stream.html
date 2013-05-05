@@ -5,9 +5,14 @@
 </head>
 <body>
 	<div id="droneStream" width="640" height="360" />
+  <canvas id="testX" width="640" height="360" style="border: 1px solid">
+  </canvas>
+  
 	<script>
 	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
 	  new NodecopterStream(document.getElementById("droneStream"));
 	</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
