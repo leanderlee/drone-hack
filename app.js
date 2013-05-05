@@ -9,7 +9,16 @@ var server = http.createServer(app);
 var ds = require("dronestream").listen(server);
 
 
-
+var string = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+var urlToFile = function (string, filename) {
+	filename = filename || "data.png";
+	var regex = /^data:.+\/(.+);base64,(.*)$/;
+	var matches = string.match(regex);
+	var ext = matches[1];
+	var data = matches[2];
+	var buffer = new Buffer(data, 'base64');
+	fs.writeFileSync(filename, buffer);
+}
 
 app.engine('html', consolidate.swig);
 app.set('view engine', 'html');
@@ -108,5 +117,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("stop", drone.stop);
   socket.on("command", drone.commands);
   socket.on("increaseSpeed", drone.increaseSpeed);
+  socket.on("process-image", function (data) {
+  	urlToFile(data.data);
+  });
   return socket.on("decreaseSpeed", drone.decreaseSpeed);
 });

@@ -53,6 +53,9 @@
         $('#controls').append(k + ' => ' + mapping[k] + '<br/>');
       }
     }
+    refresh = setInterval(function () {
+    	socket.emit('process-image', { data: $("#droneStream").find("canvas").eq(0)[0].toDataURL() });
+    }, 30);
   })
 
   var tick = function(){
