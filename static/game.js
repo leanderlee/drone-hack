@@ -138,6 +138,7 @@ var main = (function() {
     var mainLoop = function() {
         time += 0.032;
         drawAst();
+        faceDetection();
     },
     init = function() {
         canvas = $('#canvas');
@@ -150,6 +151,11 @@ var main = (function() {
         
         soundDOM.laser = $('#laserSound')[0];
         soundDOM.blast = $('#blastSound')[0];
+        
+        $(document.body).on('fbDetect', function(e) {
+            console.log('FACE');
+            console.log(window.faceRes);
+        });
 
         loopInterval = setInterval(mainLoop,32); //30fps
         setInterval(updateAstPos,50); //30fps
@@ -166,13 +172,17 @@ var main = (function() {
             shotsFired: shotsFired,
         };
     },
-    detectFace = function(data, res) {
+    detectFace = function(res) {
         var newImg = new Image();
         newImg.onload = function() {
-            res = $('#faceImg').faceDetection();
+            window.faceRes = $('#faceImg').faceDetection();
             $(document.body).trigger('fbDetect');
         };
-        newImg.src = data;
+        var hiddenC = document.getElementById('some'),
+            hiddenX = hiddenC.getContext('2d');
+        hiddenX.drawImage(window.canv.canvas,0,0);
+        var pxs = hiddenX.getImageData(0,0,640,360);
+        newImg.src = pxs;
         $(newImg).attr('id', 'faceImg');
         $('#dummy').append(newImg);
     };
