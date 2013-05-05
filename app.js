@@ -118,8 +118,5 @@ io.sockets.on("connection", function(socket) {
   socket.on("stop", drone.stop);
   socket.on("command", drone.commands);
   socket.on("increaseSpeed", drone.increaseSpeed);
-  socket.on("process-image", function (data) {
-  	urlToFile(data.data);
-  });
   return socket.on("decreaseSpeed", drone.decreaseSpeed);
 });
