@@ -113,10 +113,12 @@
     $('#instructions').click(function () {
       $('#instructions').slideUp();
       $('#game').slideDown();
+      socket.emit('takeoff');
     });
     $('#help').click(function () {
       $('#game').slideUp();
       $('#instructions').slideDown();
+      socket.emit('land');
     });
   </script>
 </body>
