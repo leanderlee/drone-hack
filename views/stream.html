@@ -12,12 +12,24 @@
       padding:10px;
     }
     .canvas {
+      z-index: 999;
       width: 640px;
       height: 360px;
       border: 1px solid;
       position: absolute;
     }
-    .crossHair {
+    #laser {
+      display: none;
+      z-index: 99999;
+      width: 2px;
+      height: 200px; 
+      position: absolute;
+      background: green;
+      top: 160px;
+      left: 320px;
+    }
+    #crossHair {
+      z-index: 9999;
       width: 120px;
       height: 120px;
       position: absolute;
@@ -28,8 +40,9 @@
   </style>
 </head>
 <body>
-  <div id="testX" class="testX">
-    <div class="crossHair"></div>
+  <div id="canvas" class="canvas">
+    <div id="crossHair"></div>
+    <div id="laser"></div>
   </div>
 	<div id="droneStream" width="640" height="360" />
 	<script>
