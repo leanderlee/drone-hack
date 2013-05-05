@@ -11,13 +11,27 @@
       right:0;
       padding:10px;
     }
+    .canvas {
+      width: 640px;
+      height: 360px;
+      border: 1px solid;
+      position: absolute;
+    }
+    .crossHair {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      left: 260px;
+      top: 120px;
+      background: red;
+    }
   </style>
 </head>
 <body>
+  <div id="testX" class="testX">
+    <div class="crossHair"></div>
+  </div>
 	<div id="droneStream" width="640" height="360" />
-  <canvas id="testX" width="640" height="360" style="border: 1px solid">
-  </canvas>
-  
 	<script>
 	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
 	  new NodecopterStream(document.getElementById("droneStream"));
