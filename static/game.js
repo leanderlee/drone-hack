@@ -4,7 +4,9 @@ var main = (function() {
         ch = undefined, 
         fired = true,
         asteroids = [],
-        score = 0;
+        score = 0,
+        time = 0,
+        loopInterval = undefined; 
     
     //support func
     var getCursorPosition = function(e) {
@@ -47,17 +49,30 @@ var main = (function() {
     var mainLoop = function() {
         console.log("loop");
         drawAst();
+        time += 0.032;
     },
     init = function() {
         canvas = $('#canvas');
+        canvas.click(fire);
         ch = $('#crossHair');
-        setInterval(mainLoop,32); //30fps
+
+        loopInterval = setIntervasetInterval(mainLoop,32); //30fps
+    },
+    finish = function() { //returns final game score
+        clearInterval(loopInterval); 
+        return score/time;
+    },
+    getStats = function {
+        return {
+        };
     };
 
     //public
     return {
         fire: fire,
         init: init,
+        finish: finish,
+        getStats: getStats
     };
 })();
 
