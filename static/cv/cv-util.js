@@ -33,10 +33,10 @@ var CvUtil = {
 		}
 		var iters = 0;
 		while (pruned.length > 0) {
-			pruned = CvUtil.match(pruned[0], pruned, 3);
+			pruned = CvUtil.match(pruned[0], pruned, 6);
 			++iters;
 		}
-		console.log(rects.length, pruned.length);
+		console.log("rects: ", rects.length);
 		return iters;
 	},
 	mode: function (xs) {

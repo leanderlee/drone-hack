@@ -1,9 +1,15 @@
 <html>
 <head>
 	<title>Hey Asteroids!</title>
-	<script src="/dronestream/nodecopter-client.js"></script>
-	<script src="/keyboard.js"></script>
-	<script src="/jquery.min.js"></script>
+  <script src="/dronestream/vendor/broadway/sylvester.js"></script>
+  <script src="/dronestream/vendor/broadway/glUtils.js"></script>
+  <script src="/dronestream/vendor/broadway/util.js"></script>
+  <script src="/dronestream/vendor/broadway/avc-codec.js"></script>
+  <script src="/dronestream/vendor/broadway/avc.js"></script>
+  <script src="/dronestream/vendor/broadway/canvas.js"></script>
+  <script src="/dronestream/nodecopter-stream.js"></script>
+  <script src="/keyboard.js"></script>
+  <script src="/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/normalize.css">
   <link rel="stylesheet" type="text/css" href="/asteroids.css">
 </head>
@@ -43,26 +49,26 @@
       </div>
       <div id="laserR"></div>
       <div id="laserL"></div>
-      <div id="droneStream" width="640" height="360" />
+      <div id="droneStream" width="640" height="360"></div>
     </div>
     <audio id="laserSound" src="/laser.wav" preload="auto"></audio>
     <audio id="blastSound" src="/blast.wav" preload="auto"></audio>
   </div>
-	<script>
-	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
-	  new NodecopterStream(document.getElementById("droneStream"));
-	</script>
   <script src="game.js"></script>
   <script src="http://localhost:3001/socket.io/socket.io.js"></script>
-
+  <script>
+    // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
+    new NodecopterStream(document.getElementById("droneStream"));
+  </script>
+  <script src="/cv/jsfeat-min.js"></script>
+  <script src="/cv/cv-util.js"></script>
+  <script src="/cv/haar-box.js"></script>
+  <script src="/cv/frontalface.js"></script>
+  <script src="/cv/vision.js"></script>
   <!-- galaxy background -->
 	<script src="/galaxy.js"></script>
   <script>
     var socket = io.connect('http://localhost:3001');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: '2' });
-    });
 
     var timer
     var log
@@ -138,7 +144,7 @@
       $('#help').show();
       $('#instructions').slideUp();
       $('#canvas').slideDown();
-      socket.emit('takeoff');
+      //socket.emit('takeoff');
       main.init();
     });
     $('#help').click(function () {
