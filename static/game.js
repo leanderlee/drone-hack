@@ -102,10 +102,11 @@ var main = (function() {
     },
     fire = function(e) {
         //draw laser
-        console.log('...');
-        $('#laser').show();
-        $('#laser').fadeOut('slow');
         soundDOM.laser.play();
+        $('#laserR').show().stop().css("opacity", 1);
+        $('#laserL').show().stop().css("opacity", 1);
+        $('#laserR').animate({ opacity: 0 }, 1000);
+        $('#laserL').animate({ opacity: 0 }, 1000);
 
         for (var id in asteroids) {
             var ast = asteroids[id];
@@ -138,11 +139,13 @@ var main = (function() {
         KeyboardJS.on('space', function() {
             fire();
         });
-
+        $('#laserR').hide();
+        $('#laserL').hide();
         ch = $('#crossHair');
         $('#blast').hide();
         
-        soundDOM.laser = $('#laserSound');
+        soundDOM.laser = $('#laserSound')[0];
+        soundDOM.blast = $('#blastSound')[0];
 
         loopInterval = setInterval(mainLoop,32); //30fps
         setInterval(updateAstPos,50); //30fps

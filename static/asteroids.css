@@ -58,15 +58,65 @@
 	border: 1px solid;
 	position: absolute;
 }
-#laser {
-	display: none;
-	z-index: 99999;
-	width: 2px;
-	height: 200px; 
-	position: absolute;
-	background: green;
-	top: 160px;
-	left: 320px;
+.blade {
+    background: #fff;
+    float: left;
+    height: 20px;
+    margin: 3px 0 0 0;
+    width: 0;
+    position: relative;
+    left: 0;
+    top: 6px;
+    border-radius: 0 1200px 1200px 0 / 0 400px 400px 0;
+    -moz-box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+    -webkit-box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+    box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+    -moz-transition-property: -moz-box-shadow, box-shadow, width;
+    -moz-transition-duration: 0.5s;
+    -ms-transition-property: box-shadow, width;
+    -ms-transition-duration: 0.5s;
+    -o-transition-property: box-shadow, width;
+    -o-transition-duration: 0.5s;
+    -webkit-transition-property: -webkit-box-shadow, box-shadow, width;
+    -webkit-transition-duration: 0.5s;
+}
+#laserR {
+background: #fff;
+float: left;
+height: 20px;
+margin: 3px 0 0 0;
+width: 370;
+position: absolute;
+left: 0;
+top: 6px;
+border-radius: 1200px 1200px 1200px 0 / 0 1400px 1400px 0;
+-webkit-box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+-webkit-transition-property: -webkit-box-shadow, box-shadow, width;
+-webkit-transition-duration: 0.5s;
+-webkit-transform: rotate(-152deg);
+z-index: 99999;
+top: 260px;
+left: 308px;
+}
+#laserL {
+background: #fff;
+float: left;
+height: 20px;
+margin: 3px 0 0 0;
+width: 370;
+position: absolute;
+left: 0;
+top: 6px;
+border-radius: 1200px 1200px 1200px 0 / 0 1400px 1400px 0;
+-webkit-box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+box-shadow: inset 0 0 5px #01fe32, 0 0 20px #08ff35, 0 0 30px #08ff35,0 0 20px #08ff35;
+-webkit-transition-property: -webkit-box-shadow, box-shadow, width;
+-webkit-transition-duration: 0.5s;
+-webkit-transform: rotate(-28deg);
+z-index: 99999;
+top: 258px;
+left: -24px;
 }
 #crossHair {
 	z-index: 999;
