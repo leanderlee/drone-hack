@@ -27,8 +27,8 @@ var main = (function() {
         fired = true,
         score = 0,
         time = 0,
-        canvasSizeX = 640,
-        canvasSizeY = 360;
+        canvasSizeX = 500,
+        canvasSizeY = 300;
     
     //support func
     var getCursorPosition = function(e) {
@@ -82,6 +82,7 @@ var main = (function() {
                     ast.destroyed = true;
 
                     $("#blast").show();
+                    soundDOM.blast.play();
 
                     setTimeout(function() {
                         $('#blast').fadeOut();
@@ -171,5 +172,5 @@ var main = (function() {
 
 $(function() {
     //Testing. Draw red square, listen for click event, react
-    //main.init();
+    main.init();
 });

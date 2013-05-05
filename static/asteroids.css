@@ -30,13 +30,14 @@
 }
 #instructions {
 	position: absolute;
-	top: 120px;
+	top: 100px;
 	display: block;
 	background: url(/instructions.png) no-repeat;
 	width: 640px;
 	height: 350px;
 	margin: 20px auto;
 	border-radius: 10px;
+    z-index: 99999999;
 }
 #canvas {
 	display: block;
