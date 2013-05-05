@@ -13,7 +13,10 @@
   },
   "main": "app.js",
   "dependencies": {
-    "ar-drone":         "latest"
+    "ar-drone":         "latest",
+    "express":          "latest",
+    "consolidate":      "latest",
+    "swig":             "latest"
   },
   "devDependencies": {},
   "optionalDependencies": {},

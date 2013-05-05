@@ -1,14 +1,19 @@
 var arDrone = require('ar-drone');
+var express = require('express');
+var consolidate = require('consolidate');
+
+
 var client  = arDrone.createClient();
-client.takeoff();
-client.after(5000, function () {
-	client.up(0.5);
+
+var app = express();
+app.engine('html', consolidate.swig);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+app.get('/', function(req, res){
+  res.render('index', {
+    title: 'Consolidate.js'
+  });
 });
 
-client.after(1000, function () {
-	client.animate('flipLeft',1500)
-});
-
-client.after(10000, function () {
-	this.land();
-});
+app.listen(3000);
