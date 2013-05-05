@@ -2,6 +2,16 @@
 <head>
 	<title>Hey Astroids!</title>
 	<script src="/dronestream/nodecopter-client.js"></script>
+	<script src="/keyboard.js"></script>
+	<script src="/jquery.min.js"></script>
+  <style type="text/css" media="screen">
+    #controls{
+      position:absolute;
+      top:0;
+      right:0;
+      padding:10px;
+    }
+  </style>
 </head>
 <body>
 	<div id="droneStream" width="640" height="360" />
@@ -14,5 +24,83 @@
 	</script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="game.js"></script>
+	<script src="http://localhost:3001/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:3001');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: '2' });
+  });
+
+  var timer
+  var log
+  var mapping = {
+    'space': 'takeoff',
+    'x' : 'land',
+    'w' : 'front',
+    's' : 'back',
+    'a' : 'left',
+    'd' : 'right',
+    'j' : 'counterClockwise',
+    'l' : 'clockwise',
+    'i' : 'up',
+    'k' : 'down',
+    'dash': 'decreaseSpeed',
+    'equal': 'increaseSpeed',
+  }
+
+  $(function(){
+    timer = setInterval(tick, 30)
+    log = $('#log')
+    
+    for (var k in mapping) {
+      if (mapping.hasOwnProperty(k)) {
+        $('#controls').append(k + ' => ' + mapping[k] + '<br/>');
+      }
+    }
+    refresh = setInterval(function () {
+    	socket.emit('process-image', { data: $("#droneStream").find("canvas").eq(0)[0].toDataURL() });
+    }, 30);
+  })
+
+  var tick = function(){
+    keys = KeyboardJS.activeKeys()
+    log.text(keys)
+
+    if(keys.length > 0) {
+
+      commands = []
+      for (var i = 0; i < keys.length; i++) {
+        key = keys[i]
+        command = mapping[key]
+        if(command != undefined){
+          commands.push(command)
+        }
+      }
+
+      if(commands.length > 0){
+        log.text(commands)
+        if(commands[0] === 'takeoff'){
+          socket.emit('takeoff');
+        } else if(commands[0] === 'land'){
+          socket.emit('land');
+        } else if(commands[0] === 'increaseSpeed'){
+          socket.emit('increaseSpeed');
+        } else if(commands[0] === 'decreaseSpeed'){
+          socket.emit('decreaseSpeed');
+        } else{
+          socket.emit('command', commands);
+        }
+      } else{
+        socket.emit('stop');
+        log.text('')
+      }
+    } else{
+      log.text('')
+      socket.emit('stop');
+    }
+  }
+
+</script>
 </body>
 </html>
