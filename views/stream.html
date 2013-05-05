@@ -111,9 +111,11 @@
   <script>
     $('#game').hide();
     $('#instructions').click(function () {
+        
       $('#instructions').slideUp();
       $('#game').slideDown();
       socket.emit('takeoff');
+      main.init();
     });
     $('#help').click(function () {
       $('#game').slideUp();
