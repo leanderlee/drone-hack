@@ -13,6 +13,9 @@
   <div id="content">
     <div id="logo"></div>
     <div id="instructions"></div>
+    <div id="game-over">
+      GG NO RE.
+    </div>
     <div id="help">?</div>
     <div id="canvas">
       <div id="crossHair">
@@ -109,17 +112,26 @@
 
   </script>
   <script>
-    $('#game').hide();
+    $('#canvas').hide();
+    $('#help').hide();
     $('#instructions').click(function () {
+      $('#help').show();
       $('#instructions').slideUp();
-      $('#game').slideDown();
+      $('#canvas').slideDown();
       socket.emit('takeoff');
     });
     $('#help').click(function () {
-      $('#game').slideUp();
+      $('#help').hide();
+      $('#canvas').slideUp();
       $('#instructions').slideDown();
       socket.emit('land');
     });
+    $(document).on('gameOver', function () {
+      $('#help').hide();
+      $('#canvas').slideUp();
+      $('#instructions').slideUp();
+      $('#game-over').slideDown();
+    })
   </script>
 </body>
 </html>
