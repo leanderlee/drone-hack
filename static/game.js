@@ -93,8 +93,8 @@ var main = (function() {
     fire = function(e) {
         //draw laser
         console.log('...');
-        $('#laser').show();
-        $('#laser').fadeOut('slow');
+        $('#laser').show().stop().css("opacity", 1);
+        $('#laser').animate({ opacity: 0 }, 1000);
 
         for (var id in asteroids) {
             var ast = asteroids[id];
