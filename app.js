@@ -23,7 +23,7 @@ var urlToFile = function (string, filename) {
 app.engine('html', consolidate.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/static/images'));
 
 app.use(express.static(__dirname + "/static"));
 

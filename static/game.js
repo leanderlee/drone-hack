@@ -26,6 +26,8 @@ var main = (function() {
         }
     },
     drawAst = function() {
+	var ast = $('<div>', {'class': "asteroid"});
+	canvas.append(ast);
     },
     fire = function(e) {
         //draw laser
