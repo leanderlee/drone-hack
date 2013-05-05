@@ -138,6 +138,7 @@ var main = (function() {
     var mainLoop = function() {
         console.log("loop");
         time += 0.032;
+        console.log(time);
         drawAst();
     },
     init = function() {
@@ -146,8 +147,6 @@ var main = (function() {
         KeyboardJS.on('space', function() {
             fire();
         });
-        $('#laserR').hide();
-        $('#laserL').hide();
         ch = $('#crossHair');
         $('#blast').hide();
         
@@ -178,11 +177,3 @@ var main = (function() {
         getStats: getStats
     };
 })();
-
-$(function() {
-    //Testing. Draw red square, listen for click event, react
-    main.init();
-    $('body').bind('gameOver', function() {
-       console.log('GAMEOVER'); 
-    });
-});

@@ -139,6 +139,7 @@
       $('#instructions').slideUp();
       $('#canvas').slideDown();
       socket.emit('takeoff');
+      main.init();
     });
     $('#help').click(function () {
       $('#help').hide();

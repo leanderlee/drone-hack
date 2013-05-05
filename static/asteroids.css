@@ -102,6 +102,7 @@
     -webkit-transition-duration: 0.5s;
 }
 #laserR {
+display: none;
 background: #fff;
 float: left;
 height: 20px;
@@ -121,6 +122,7 @@ top: 260px;
 left: 308px;
 }
 #laserL {
+display: none;
 background: #fff;
 float: left;
 height: 20px;
