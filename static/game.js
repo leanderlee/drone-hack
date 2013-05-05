@@ -53,21 +53,9 @@ var main = (function() {
 
             if (!astPos) {
                 asteroidsPos[id] = {};
-                asteroidsPos[id].x = Math.random()*canvasSizeX;
-                asteroidsPos[id].y = Math.random()*canvasSizeY;
             }
-            else {
-                if (Math.random() > 0.5) {
-                    //asteroidsPos[id].x -= Math.random()*15;
-                    //asteroidsPos[id].y -= Math.random()*15;
-                }
-                else {
-                    //asteroidsPos[id].x += Math.random()*15;
-                    //asteroidsPos[id].y += Math.random()*15;
-                    asteroidsPos[id].x = 270;
-                    asteroidsPos[id].y = 150; 
-                }
-            }
+            asteroidsPos[id].x = Math.random()*canvasSizeX;
+            asteroidsPos[id].y = Math.random()*canvasSizeY;
         }
     },
     drawAst = function() {
@@ -84,21 +72,20 @@ var main = (function() {
                 }
 
                 if (ast.hit) {
-                    var curId = {id: id};
-                    ast.el.attr('src', 'blast.gif');
-                    //remove itself later
-                    ast.el.animate({
-                        opactiy: 0,
-                    }, 500, function(id) {
-                        asteroids[id].destroyed = true;
-                        asteroids[id].el.remove();
-                    }(id));
+                    ast.el.remove();
+                    ast.destroyed = true;
+
+                    $("#blast").show();
+
+                    setTimeout(function() {
+                        $('#blast').fadeOut();
+                    }, 1000);
                 }
                 else {
                     ast.el.animate({
                         top: astPos.y, 
                         left: astPos.x, 
-                    }, 32, function() {});
+                    }, 1500);
                 }
             }
         }
@@ -131,16 +118,21 @@ var main = (function() {
     //setting up game
     var mainLoop = function() {
         console.log("loop");
-        updateAstPos();
         drawAst();
         time += 0.032;
     },
     init = function() {
         canvas = $('#canvas');
-        canvas.click(fire);
+
+        KeyboardJS.on('space', function() {
+            fire();
+        });
+
         ch = $('#crossHair');
+        $('#blast').hide();
 
         loopInterval = setInterval(mainLoop,32); //30fps
+        setInterval(updateAstPos,50); //30fps
     },
     finish = function() { //returns final game score
         clearInterval(loopInterval); 
