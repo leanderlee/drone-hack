@@ -7,7 +7,7 @@ Vision.init = function () {
   Vision.start()
 };
 Vision.start = function () {
-  Vision.scale = Math.min(128/640, 128/360);
+  Vision.scale = Math.min(256/640, 256/360);
   Vision.w = (640*Vision.scale)|0;
   Vision.h = (360*Vision.scale)|0;
   Vision.backCanvas.width = Vision.w;
@@ -19,7 +19,6 @@ Vision.detectFeature = function (classifier_name, classifier) {
     Vision.sum_img, Vision.sqsum_img, Vision.tilted, null,
     Vision.w, Vision.h, classifier, 1.15, 2);
   var confident_rects = [];
-  /*
   if (classifier_name == 'box') {
     for (var i=0, n=rects.length; i < n; i++) {
       if (rects[i].confidence < 0.5) continue;
@@ -35,7 +34,6 @@ Vision.detectFeature = function (classifier_name, classifier) {
     rects = [].concat.apply(rects, Vision.rect_wnd);
     Vision.res_wnd.push(CvUtil.matchMarker(rects));
   }
-  */
   var sc = 640/Vision.w;
     console.log("here wtf", rects);
   jsfeat.math.qsort(rects, 0, rects.length-1, function(a,b){return (b.confidence<a.confidence);});
@@ -79,8 +77,8 @@ Vision.draw = function () {
   jsfeat.imgproc.compute_integral_image(
     Vision.gray_img, Vision.sum_img, Vision.sqsum_img, null);
   jsfeat.haar.edges_density = 0.13;
-  //var r1 = Vision.detectFeature('box', jsfeat.haar.box);
-  //if (r1) console.log(r1);
+  var r1 = Vision.detectFeature('box', jsfeat.haar.box);
+  if (r1) console.log(r1);
   var r2 = Vision.detectFeature('face', jsfeat.haar.frontalface);
   if (r2) console.log(r2);
 };

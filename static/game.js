@@ -138,7 +138,7 @@ var main = (function() {
     var mainLoop = function() {
         time += 0.032;
         drawAst();
-        faceDetection();
+        detectFace();
     },
     init = function() {
         canvas = $('#canvas');
@@ -174,17 +174,13 @@ var main = (function() {
     },
     detectFace = function(res) {
         var newImg = new Image();
-        newImg.onload = function() {
-            window.faceRes = $('#faceImg').faceDetection();
-            $(document.body).trigger('fbDetect');
-        };
         var hiddenC = document.getElementById('some'),
             hiddenX = hiddenC.getContext('2d');
         hiddenX.drawImage(window.canv.canvas,0,0);
         var pxs = hiddenX.getImageData(0,0,640,360);
-        newImg.src = pxs;
-        $(newImg).attr('id', 'faceImg');
-        $('#dummy').append(newImg);
+        newImg.data = pxs;
+        window.faceRes = $(newImg).faceDetection();
+        $(document.body).trigger('fbDetect');
     };
 
     //public
