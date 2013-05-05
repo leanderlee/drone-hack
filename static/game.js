@@ -21,6 +21,8 @@ var main = (function() {
             r2: undefined,
             r3: undefined
         },
+        soundDOM = {
+        },
         loopInterval = undefined; 
         fired = true,
         score = 0,
@@ -59,11 +61,15 @@ var main = (function() {
         }
     },
     drawAst = function() {
+        var gameFinished = true;
+
         for (var id in asteroids) {
             var ast = asteroids[id],
                 astPos = asteroidsPos[id];
              
             if (!ast.destroyed) { //defined so has x & y
+                gameFinished = false;
+
                 if (!ast.el && !ast.destroyed) {
                     console.log('recreating...');
                     var rockId = Math.ceil(Math.random()*5);
@@ -89,12 +95,17 @@ var main = (function() {
                 }
             }
         }
+        
+        if (gameFinished) {
+            endGame();
+        }
     },
     fire = function(e) {
         //draw laser
         console.log('...');
         $('#laser').show();
         $('#laser').fadeOut('slow');
+        soundDOM.laser.play();
 
         for (var id in asteroids) {
             var ast = asteroids[id];
@@ -118,8 +129,8 @@ var main = (function() {
     //setting up game
     var mainLoop = function() {
         console.log("loop");
-        drawAst();
         time += 0.032;
+        drawAst();
     },
     init = function() {
         canvas = $('#canvas');
@@ -130,12 +141,15 @@ var main = (function() {
 
         ch = $('#crossHair');
         $('#blast').hide();
+        
+        soundDOM.laser = $('#laserSound');
 
         loopInterval = setInterval(mainLoop,32); //30fps
         setInterval(updateAstPos,50); //30fps
     },
-    finish = function() { //returns final game score
+    endGame = function() { //returns final game score
         clearInterval(loopInterval); 
+        $.trigger('gameOver');
         return score/time;
     },
     getStats = function () {
@@ -147,7 +161,7 @@ var main = (function() {
     return {
         fire: fire,
         init: init,
-        finish: finish,
+        finish: endGame,
         getStats: getStats
     };
 })();

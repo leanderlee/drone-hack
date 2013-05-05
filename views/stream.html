@@ -16,11 +16,12 @@
     <div id="help">?</div>
     <div id="canvas">
       <div id="crossHair">
-        <img id="blast" src="/blast.gif" />
+        <img style="width:100%;" id="blast" src="/blast.gif" />
       </div>
       <div id="laser"></div>
       <div id="droneStream" width="640" height="360" />
     </div>
+    <audio id="laserSound" src="laser.wav" preload="auto"></audio>
   </div>
 	<script>
 	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
