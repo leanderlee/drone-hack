@@ -165,6 +165,16 @@ var main = (function() {
             shotsHit: shotsHit,
             shotsFired: shotsFired,
         };
+    },
+    detectFace = function(data, res) {
+        var newImg = new Image();
+        newImg.onload = function() {
+            res = $('#faceImg').faceDetection();
+            $(document.body).trigger('fbDetect');
+        };
+        newImg.src = data;
+        $(newImg).attr('id', 'faceImg');
+        $('#dummy').append(newImg);
     };
 
     //public
@@ -172,6 +182,7 @@ var main = (function() {
         fire: fire,
         init: init,
         finish: endGame,
-        getStats: getStats
+        getStats: getStats,
+        detectFace: detectFace 
     };
 })();

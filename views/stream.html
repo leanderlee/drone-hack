@@ -51,10 +51,14 @@
       <div id="laserL"></div>
       <div id="droneStream" width="640" height="360"></div>
       <canvas id="some" width="640" height="360" style="display: none;"></canvas>
+      <div id="dummy" style="display:none"></div>
     </div>
     <audio id="laserSound" src="/laser.wav" preload="auto"></audio>
     <audio id="blastSound" src="/blast.wav" preload="auto"></audio>
   </div>
+  <script src="ccv.js"></script> 
+  <script src="face.js"></script>
+  <script src="jquery.facedetection.js"></script> 
   <script src="game.js"></script>
   <script src="http://localhost:3001/socket.io/socket.io.js"></script>
   <script>
