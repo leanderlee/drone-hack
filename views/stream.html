@@ -12,12 +12,15 @@
   <canvas id='background'></canvas>
   <div id="content">
     <div id="logo"></div>
-    <div id="instructions"></div>
-    <div id="help">?</div>
-    <div id="canvas">
-      <div id="crossHair"></div>
-      <div id="laser"></div>
-      <div id="droneStream" width="640" height="360" />
+      <div id="instructions"></div>
+      <div id="game">
+        <div id="help">?</div>
+        <div id="canvas">
+          <div id="crossHair"></div>
+          <div id="laser"></div>
+          <div id="droneStream" width="640" height="360" />
+        </div>
+      </div>
     </div>
   </div>
 	<script>
@@ -102,6 +105,17 @@
       }
     }
 
+  </script>
+  <script>
+    $('#game').hide();
+    $('#instructions').click(function () {
+      $('#instructions').slideUp();
+      $('#game').slideDown();
+    });
+    $('#help').click(function () {
+      $('#game').slideUp();
+      $('#instructions').slideDown();
+    });
   </script>
 </body>
 </html>

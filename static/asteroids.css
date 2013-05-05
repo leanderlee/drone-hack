@@ -30,8 +30,8 @@
 }
 #instructions {
 	position: absolute;
-	top: -10px;
-	display: none;
+	top: 120px;
+	display: block;
 	background: url(/instructions.png) no-repeat;
 	width: 640px;
 	height: 350px;
