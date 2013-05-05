@@ -50,6 +50,7 @@
       <div id="laserR"></div>
       <div id="laserL"></div>
       <div id="droneStream" width="640" height="360"></div>
+      <img id="someImg" style="display: none;" />
       <canvas id="some" width="640" height="360" style="display: none;"></canvas>
       <div id="dummy" style="display:none"></div>
     </div>
@@ -149,7 +150,7 @@
       $('#help').show();
       $('#instructions').slideUp();
       $('#canvas').slideDown();
-      //socket.emit('takeoff');
+      socket.emit('takeoff');
       main.init();
     });
     $('#help').click(function () {

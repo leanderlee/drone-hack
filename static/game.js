@@ -73,7 +73,6 @@ var main = (function() {
                 gameFinished = false;
 
                 if (!ast.el && !ast.destroyed) {
-                    console.log('recreating...');
                     var rockId = Math.ceil(Math.random()*5);
                     ast.el = $('<img>', {'class': 'asteroid', 'src': 'rock'+rockId+'.png'});
                     canvas.prepend(ast.el);
@@ -152,11 +151,6 @@ var main = (function() {
         soundDOM.laser = $('#laserSound')[0];
         soundDOM.blast = $('#blastSound')[0];
         
-        $(document.body).on('fbDetect', function(e) {
-            console.log('FACE');
-            console.log(window.faceRes);
-        });
-
         loopInterval = setInterval(mainLoop,32); //30fps
         setInterval(updateAstPos,50); //30fps
     },
@@ -173,14 +167,17 @@ var main = (function() {
         };
     },
     detectFace = function(res) {
-        var newImg = new Image();
+        var newImg = document.getElementById('someImg');
         var hiddenC = document.getElementById('some'),
             hiddenX = hiddenC.getContext('2d');
         hiddenX.drawImage(window.canv.canvas,0,0);
         var pxs = hiddenX.getImageData(0,0,640,360);
         newImg.data = pxs;
-        window.faceRes = $(newImg).faceDetection();
-        $(document.body).trigger('fbDetect');
+        window.faceRes = $("#someImg").faceDetection();
+        asteroidsPos["r1"] = { x: window.faceRes.x, y: window.faceRes.y };
+        // canvas.getContext("2d").strokeStyle = "rgb(0,255,0)";
+        // canvas.getContext("2d").strokeRect(faceRes.x, faceRes.y, faceRes.width, faceRes.height);
+        //$(document.body).trigger('fbDetect');
     };
 
     //public

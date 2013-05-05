@@ -35,7 +35,6 @@ Vision.detectFeature = function (classifier_name, classifier) {
     Vision.res_wnd.push(CvUtil.matchMarker(rects));
   }
   var sc = 640/Vision.w;
-    console.log("here wtf", rects);
   jsfeat.math.qsort(rects, 0, rects.length-1, function(a,b){return (b.confidence<a.confidence);});
   if (rects.length > 0) {
     var ret = rects[0];

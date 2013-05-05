@@ -36,7 +36,6 @@ var CvUtil = {
 			pruned = CvUtil.match(pruned[0], pruned, 6);
 			++iters;
 		}
-		console.log("rects: ", rects.length);
 		return iters;
 	},
 	mode: function (xs) {
