@@ -4,21 +4,22 @@ Vision.init = function () {
   Vision.backCanvas = document.createElement('canvas');
   Vision.rect_wnd = [];
   Vision.res_wnd = [];
+  Vision.start()
 };
-Vision.start = function (stream) {
+Vision.start = function () {
   Vision.scale = Math.min(128/640, 128/360);
   Vision.w = (640*Vision.scale)|0;
   Vision.h = (360*Vision.scale)|0;
   Vision.classifier = jsfeat.haar.box;
   Vision.backCanvas.width = Vision.w;
   Vision.backCanvas.height = Vision.h;
-  setInterval(function () {
-    Vision.draw();
-  }, 50);
+  setInterval(function(){Vision.draw()}, 50);
 };
 Vision.draw = function () {
-  Vision.backCtx.drawImage(Vision.video, 0, 0, Vision.backCanvas.width, Vision.backCanvas.height);
-  var pxs = Vision.backCtx.getImageData(0, 0, Vision.backCanvas.width, Vision.backCanvas.height);
+  var pxs = new jsfeat.matrix_t(640, 360, jsfeat.U8_t | jsfeat.C4_t);
+  window.canv.readPixels(pxs.data);
+  //Vision.backCtx.drawImage(img, 0, 0, Vision.backCanvas.width, Vision.backCanvas.height);
+  //var pxs = Vision.backCtx.getImageData(0, 0, Vision.backCanvas.width, Vision.backCanvas.height);
 
   if (Vision.gray_img === undefined) {
     Vision.gray_img = new jsfeat.matrix_t(Vision.w, Vision.h, jsfeat.U8_t | jsfeat.C1_t);
@@ -37,6 +38,7 @@ Vision.draw = function () {
   var rects = jsfeat.haar.detect_multi_scale(
     Vision.sum_img, Vision.sqsum_img, Vision.tilted, null,
     Vision.w, Vision.h, Vision.classifier, 1.15, 2);
+  console.log(rects.length);
   var confident_rects = [];
   for (var i=0, n=rects.length; i < n; i++) {
     if (rects[i].confidence < 0.5) continue;

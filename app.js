@@ -7,7 +7,30 @@ var app = express();
 var http = require("http");
 var server = http.createServer(app);
 var ds = require("dronestream").listen(server);
+var io = require("socket.io").listen(3001, { log: false });
 
+/*
+var lastPng;
+pngStream
+  .on('error', console.log)
+  .on('data', function(pngBuffer) {
+    console.log("data wtf");
+    lastPng = pngBuffer;
+    io.sockets.emit("frame");
+  });
+
+var server1 = http.createServer(function(req, res) {
+  if (!lastPng) {
+    res.writeHead(503);
+    res.end('Did not receive any png data yet.');
+    return;
+  }
+
+  res.writeHead(200, {'Content-Type': 'image/png'});
+  res.end(lastPng);
+});
+server1.listen(3002);
+*/
 
 var string = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
 var urlToFile = function (string, filename) {
@@ -41,7 +64,7 @@ app.get('/stream', function(req, res){
 
 server.listen(3000);
 
-var Drone, app, arDrone, control, drone, ejs, express, io, pcmd, port, ref, start,
+var Drone, app, arDrone, control, drone, ejs, express, pcmd, port, ref, start,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 start = Date.now();
 ref = {};
@@ -109,8 +132,6 @@ drone = new Drone(0.5);
 drone.speed = 0.4;
 
 console.log(drone);
-
-io = require("socket.io").listen(3001);
 
 io.sockets.on("connection", function(socket) {
   socket.on("takeoff", drone.takeoff);
