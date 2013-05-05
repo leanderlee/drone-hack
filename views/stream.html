@@ -1,0 +1,13 @@
+<html>
+<head>
+	<title>Hey Astroids!</title>
+	<script src="/dronestream/nodecopter-client.js"></script>
+</head>
+<body>
+	<div id="droneStream" width="640" height="360" />
+	<script>
+	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
+	  new NodecopterStream(document.getElementById("droneStream"));
+	</script>
+</body>
+</html>
