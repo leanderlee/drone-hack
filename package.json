@@ -16,7 +16,9 @@
     "ar-drone":         "latest",
     "express":          "latest",
     "consolidate":      "latest",
-    "swig":             "latest"
+    "swig":             "latest",
+    "dronestream":      "latest",
+    "socket.io":        "latest"
   },
   "devDependencies": {},
   "optionalDependencies": {},
