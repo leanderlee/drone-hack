@@ -4,6 +4,7 @@
 	<script src="/dronestream/nodecopter-client.js"></script>
 	<script src="/keyboard.js"></script>
 	<script src="/jquery.min.js"></script>
+<<<<<<< HEAD
   <style type="text/css" media="screen">
     #controls{
       position:absolute;
@@ -45,17 +46,22 @@
       background-image: url('/Users/devashishsharma/drone-hack/static/images/rock3.png');
     }
   </style>
+=======
+  <link rel="stylesheet" type="text/css" href="/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/asteroids.css">
+>>>>>>> 3fd7e991150328ff6d11be4557dcba114de6e02d
 </head>
 <body>
-  <div id="canvas" class="canvas">
-    <div id="crossHair"></div>
-    <div id="laser"></div>
-      <a href="https://github.com/leanderlee/drone-hack"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/forkme.png" alt="Fork me on GitHub"></a>
-      <canvas id='background' />
-      <div id="testX" class="testX">
-        <div class="crossHair"></div>
+  <a href="https://github.com/leanderlee/drone-hack"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/forkme.png" alt="Fork me on GitHub"></a>
+  <canvas id='background'></canvas>
+  <div id="content">
+    <div id="logo"></div>
+    <div id="canvas">
+      <div id="crossHair"></div>
+      <div id="laser"></div>
+      <div id="droneStream" width="640" height="360" />
+    </div>
   </div>
-	<div id="droneStream" width="640" height="360" />
 	<script>
 	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
 	  new NodecopterStream(document.getElementById("droneStream"));
@@ -63,143 +69,143 @@
   <script src="game.js"></script>
 	<script src="http://localhost:3001/socket.io/socket.io.js"></script>
 
-<!-- galaxy background -->
-<script>
-    MAX_DEPTH = 32;
+  <!-- galaxy background -->
+  <script>
+      MAX_DEPTH = 32;
 
-    var canvas, ctx;
-    var stars = new Array(512);
+      var canvas, ctx;
+      var stars = new Array(512);
 
-    window.onload = function() {
-      canvas = document.getElementById("background");
-      canvas.width = document.width;
-      canvas.height = document.height;
-      if( canvas && canvas.getContext ) {
-        ctx = canvas.getContext("2d");
-        initStars();
-        setInterval(loop,33);
-       }
-    }
-
-    /* Returns a random number in the range [minVal,maxVal] */
-    function randomRange(minVal,maxVal) {
-      return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
-    }
-
-    function initStars() {
-      for( var i = 0; i < stars.length; i++ ) {
-        stars[i] = {
-          x: randomRange(-25,25),
-          y: randomRange(-25,25),
-          z: randomRange(1,MAX_DEPTH)
+      window.onload = function() {
+        canvas = document.getElementById("background");
+        canvas.width = document.width;
+        canvas.height = document.height;
+        if( canvas && canvas.getContext ) {
+          ctx = canvas.getContext("2d");
+          initStars();
+          setInterval(loop,60);
          }
       }
-    }
 
-    function loop() {
-      var halfWidth  = canvas.width / 2;
-      var halfHeight = canvas.height / 2;
-
-      ctx.fillStyle = "rgb(0,0,0)";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-
-      for( var i = 0; i < stars.length; i++ ) {
-        stars[i].z -= 0.2;
-
-        if( stars[i].z <= 0 ) {
-          stars[i].x = randomRange(-25,25);
-          stars[i].y = randomRange(-25,25);
-          stars[i].z = MAX_DEPTH;
-        }
-
-        var k  = 128.0 / stars[i].z;
-        var px = stars[i].x * k + halfWidth;
-        var py = stars[i].y * k + halfHeight;
-
-        if( px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height ) {
-          var size = (1 - stars[i].z / 32.0) * 5;
-          var shade = parseInt((1 - stars[i].z / 32.0) * 255);
-          ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
-          ctx.fillRect(px,py,size,size);
-        }
+      /* Returns a random number in the range [minVal,maxVal] */
+      function randomRange(minVal,maxVal) {
+        return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
       }
-    }
-</script>
 
-
-<script>
-  var socket = io.connect('http://localhost:3001');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: '2' });
-  });
-
-  var timer
-  var log
-  var mapping = {
-    'enter': 'takeoff',
-    'esc' : 'land',
-    'up' : 'front',
-    'down' : 'back',
-    //'left' : 'left',
-    //'right' : 'right',
-    'left' : 'counterClockwise',
-    'right' : 'clockwise',
-    //'i' : 'up',
-    //'k' : 'down',
-    'dash': 'decreaseSpeed',
-    'equal': 'increaseSpeed',
-  }
-
-  $(function(){
-    timer = setInterval(tick, 30)
-    log = $('#log')
-    
-    for (var k in mapping) {
-      if (mapping.hasOwnProperty(k)) {
-        $('#controls').append(k + ' => ' + mapping[k] + '<br/>');
-      }
-    }
-  })
-
-  var tick = function(){
-    keys = KeyboardJS.activeKeys()
-    log.text(keys)
-
-    if(keys.length > 0) {
-
-      commands = []
-      for (var i = 0; i < keys.length; i++) {
-        key = keys[i]
-        command = mapping[key]
-        if(command != undefined){
-          commands.push(command)
+      function initStars() {
+        for( var i = 0; i < stars.length; i++ ) {
+          stars[i] = {
+            x: randomRange(-25,25),
+            y: randomRange(-25,25),
+            z: randomRange(1,MAX_DEPTH)
+           }
         }
       }
 
-      if(commands.length > 0){
-        log.text(commands)
-        if(commands[0] === 'takeoff'){
-          socket.emit('takeoff');
-        } else if(commands[0] === 'land'){
-          socket.emit('land');
-        } else if(commands[0] === 'increaseSpeed'){
-          socket.emit('increaseSpeed');
-        } else if(commands[0] === 'decreaseSpeed'){
-          socket.emit('decreaseSpeed');
+      function loop() {
+        var halfWidth  = canvas.width / 2;
+        var halfHeight = canvas.height / 2;
+
+        ctx.fillStyle = "rgb(0,0,0)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        for( var i = 0; i < stars.length; i++ ) {
+          stars[i].z -= 0.1;
+
+          if( stars[i].z <= 0 ) {
+            stars[i].x = randomRange(-25,25);
+            stars[i].y = randomRange(-25,25);
+            stars[i].z = MAX_DEPTH;
+          }
+
+          var k  = 384.0 / stars[i].z;
+          var px = stars[i].x * k + halfWidth;
+          var py = stars[i].y * k + halfHeight;
+
+          if( px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height ) {
+            var size = (1 - stars[i].z / 32.0) * 5;
+            var shade = parseInt((1 - stars[i].z / 32.0) * 255);
+            ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
+            ctx.fillRect(px,py,size,size);
+          }
+        }
+      }
+  </script>
+
+
+  <script>
+    var socket = io.connect('http://localhost:3001');
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: '2' });
+    });
+
+    var timer
+    var log
+    var mapping = {
+      'enter': 'takeoff',
+      'esc' : 'land',
+      'up' : 'front',
+      'down' : 'back',
+      //'left' : 'left',
+      //'right' : 'right',
+      'left' : 'counterClockwise',
+      'right' : 'clockwise',
+      //'i' : 'up',
+      //'k' : 'down',
+      'dash': 'decreaseSpeed',
+      'equal': 'increaseSpeed',
+    }
+
+    $(function(){
+      timer = setInterval(tick, 30)
+      log = $('#log')
+      
+      for (var k in mapping) {
+        if (mapping.hasOwnProperty(k)) {
+          $('#controls').append(k + ' => ' + mapping[k] + '<br/>');
+        }
+      }
+    })
+
+    var tick = function(){
+      keys = KeyboardJS.activeKeys()
+      log.text(keys)
+
+      if(keys.length > 0) {
+
+        commands = []
+        for (var i = 0; i < keys.length; i++) {
+          key = keys[i]
+          command = mapping[key]
+          if(command != undefined){
+            commands.push(command)
+          }
+        }
+
+        if(commands.length > 0){
+          log.text(commands)
+          if(commands[0] === 'takeoff'){
+            socket.emit('takeoff');
+          } else if(commands[0] === 'land'){
+            socket.emit('land');
+          } else if(commands[0] === 'increaseSpeed'){
+            socket.emit('increaseSpeed');
+          } else if(commands[0] === 'decreaseSpeed'){
+            socket.emit('decreaseSpeed');
+          } else{
+            socket.emit('command', commands);
+          }
         } else{
-          socket.emit('command', commands);
+          socket.emit('stop');
+          log.text('')
         }
       } else{
-        socket.emit('stop');
         log.text('')
+        socket.emit('stop');
       }
-    } else{
-      log.text('')
-      socket.emit('stop');
     }
-  }
 
-</script>
+  </script>
 </body>
 </html>
