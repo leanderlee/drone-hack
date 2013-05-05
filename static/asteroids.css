@@ -6,8 +6,20 @@
 	z-index: -1;
 }
 #content {
+	position: relative;
 	width: 640px;
 	margin: 0 auto;
+}
+#help {
+	position: absolute;
+	top: 120px;
+	right: -100px;
+	color: white;
+	cursor: pointer;
+	font: 32pt/32pt Arial;
+	width: 64px;
+	height: 64px;
+	margin: 0;
 }
 #logo {
 	display: block;
@@ -15,6 +27,16 @@
 	width: 563px;
 	height: 68px;
 	margin: 50px auto;
+}
+#instructions {
+	position: absolute;
+	top: -10px;
+	display: none;
+	background: url(/instructions.png) no-repeat;
+	width: 640px;
+	height: 350px;
+	margin: 20px auto;
+	border-radius: 10px;
 }
 #canvas {
 	display: block;
