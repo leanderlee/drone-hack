@@ -14,7 +14,27 @@
     <div id="logo"></div>
     <div id="instructions"></div>
     <div id="game-over">
-      GG NO RE.
+      <h2>Good Game.</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>Score</td>
+            <td class="score"></td>
+          </tr>
+          <tr>
+            <td>Accuracy</td>
+            <td class="accuracy"></td>
+          </tr>
+          <tr>
+            <td>Time</td>
+            <td class="time"></td>
+          </tr>
+          <tr>
+            <td>Overall</td>
+            <td class="overall"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div id="help">?</div>
     <div id="canvas">
@@ -131,6 +151,23 @@
       $('#canvas').slideUp();
       $('#instructions').slideUp();
       $('#game-over').slideDown();
+
+      var stats = main.getStats();
+      stats.time = Math.round(stats.time)
+      // var stats = { score: 300, time: 100000, shotsHit: 3, shotsFired: 123 };
+      var pct = (stats.shotsHit/stats.shotsFired);
+      $("#game-over .accuracy").text(stats.shotsHit + "/" + stats.shotsFired + " = " + pct.toFixed(1) + "%");
+      $("#game-over .score").text(stats.score + " points");
+      $("#game-over .time").text(stats.time + " seconds taken");
+      var overall = 5;
+      if (stats.time > 10) overall--;
+      if (stats.time > 30) overall--;
+      if (pct < 0.9) overall--;
+      if (pct < 0.5) overall--;
+      $("#game-over .overall").text(overall + "/5");
+      var messages = ["Just go home.", "You tried.", "Good game, need more practice!", "So close! Almost a master.", "Congratulations, boss."];
+      $("#game-over h2").text(messages[overall-1]);
+      
     })
   </script>
 </body>

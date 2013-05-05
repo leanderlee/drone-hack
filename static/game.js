@@ -26,6 +26,7 @@ var main = (function() {
         loopInterval = undefined; 
         fired = true,
         shotsFired = 0,
+        shotsHit = 0,
         score = 0,
         time = 0,
         canvasSizeX = 500,
@@ -127,6 +128,7 @@ var main = (function() {
                 topCoord < 180 && leftCoord < 320) {
                 console.log('Woohoo~');
                 ast.hit = true;
+                shotsHit++;
                 score += 100; //change 
             }
         }
@@ -163,7 +165,8 @@ var main = (function() {
         return {
             score: score,
             time: time,
-            shotFired: shotsFired,
+            shotsHit: shotsHit,
+            shotsFired: shotsFired,
         };
     };
 

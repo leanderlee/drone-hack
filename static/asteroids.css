@@ -37,8 +37,28 @@
 	height: 350px;
 	margin: 20px auto;
 	border-radius: 10px;
-    z-index: 99999999;
+	z-index: 99999999;
 }
+#game-over {
+	position: absolute;
+	top: 100px;
+	display: none;
+	background: white;
+	width: 640px;
+	height: 350px;
+	margin: 20px auto;
+	border-radius: 10px;
+	z-index: 99999999;
+}
+	#game-over h2 {
+		padding: 40px 60px 10px;
+	}
+	#game-over table {
+		margin: 0 auto;
+	}
+	#game-over td {
+		padding: 10px 20px;
+	}
 #canvas {
 	display: block;
 	position: relative;
