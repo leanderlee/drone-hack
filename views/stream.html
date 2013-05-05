@@ -157,7 +157,7 @@
       stats.time = Math.round(stats.time)
       // var stats = { score: 300, time: 100000, shotsHit: 3, shotsFired: 123 };
       var pct = (stats.shotsHit/stats.shotsFired);
-      $("#game-over .accuracy").text(stats.shotsHit + "/" + stats.shotsFired + " = " + pct.toFixed(1) + "%");
+      $("#game-over .accuracy").text(stats.shotsHit + "/" + stats.shotsFired + " = " + (pct*100).toFixed(1) + "%");
       $("#game-over .score").text(stats.score + " points");
       $("#game-over .time").text(stats.time + " seconds taken");
       var overall = 5;
