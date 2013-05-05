@@ -36,7 +36,6 @@
 	  // video canvas will auto-size to the DOM-node, or default to 640*360 if no size is set.
 	  new NodecopterStream(document.getElementById("droneStream"));
 	</script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="game.js"></script>
 	<script src="http://localhost:3001/socket.io/socket.io.js"></script>
 <script>
@@ -49,16 +48,16 @@
   var timer
   var log
   var mapping = {
-    'space': 'takeoff',
-    'x' : 'land',
-    'w' : 'front',
-    's' : 'back',
-    'a' : 'left',
-    'd' : 'right',
-    'j' : 'counterClockwise',
-    'l' : 'clockwise',
-    'i' : 'up',
-    'k' : 'down',
+    'enter': 'takeoff',
+    'esc' : 'land',
+    'up' : 'front',
+    'down' : 'back',
+    //'left' : 'left',
+    //'right' : 'right',
+    'left' : 'counterClockwise',
+    'right' : 'clockwise',
+    //'i' : 'up',
+    //'k' : 'down',
     'dash': 'decreaseSpeed',
     'equal': 'increaseSpeed',
   }
@@ -72,9 +71,6 @@
         $('#controls').append(k + ' => ' + mapping[k] + '<br/>');
       }
     }
-    refresh = setInterval(function () {
-    	socket.emit('process-image', { data: $("#droneStream").find("canvas").eq(0)[0].toDataURL() });
-    }, 30);
   })
 
   var tick = function(){
