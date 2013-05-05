@@ -102,6 +102,7 @@ var main = (function() {
     },
     fire = function(e) {
         //draw laser
+        soundDOM.laser.currentTime = 0;
         soundDOM.laser.play();
         $('#laserR').show().stop().css("opacity", 1);
         $('#laserL').show().stop().css("opacity", 1);
@@ -171,5 +172,5 @@ var main = (function() {
 
 $(function() {
     //Testing. Draw red square, listen for click event, react
-    //main.init();
+    main.init();
 });
