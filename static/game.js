@@ -171,9 +171,5 @@ var main = (function() {
 
 $(function() {
     //Testing. Draw red square, listen for click event, react
-    main.init();
-    var t = $('<img>', {'class': 'asteroid', 'src': 'rock3.png'});
-    $('#canvas').prepend(t);
-    t.css('top',170);
-    t.css('left', 310);
+    //main.init();
 });
