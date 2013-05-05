@@ -136,9 +136,7 @@ var main = (function() {
 
     //setting up game
     var mainLoop = function() {
-        console.log("loop");
         time += 0.032;
-        console.log(time);
         drawAst();
     },
     init = function() {
