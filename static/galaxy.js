@@ -2,7 +2,7 @@
 MAX_DEPTH = 32;
 
 var canvas, ctx;
-var stars = new Array(512);
+var stars = new Array(256);
 
 window.onload = function() {
   canvas = document.getElementById("background");
@@ -11,7 +11,7 @@ window.onload = function() {
   if( canvas && canvas.getContext ) {
     ctx = canvas.getContext("2d");
     initStars();
-    setInterval(loop,60);
+    setInterval(loop,32);
    }
 }
 
