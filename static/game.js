@@ -103,6 +103,7 @@ var main = (function() {
     },
     fire = function(e) {
         //draw laser
+        soundDOM.laser.currentTime = 0;
         soundDOM.laser.play();
         $('#laserR').show().stop().css("opacity", 1);
         $('#laserL').show().stop().css("opacity", 1);
