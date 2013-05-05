@@ -1,9 +1,10 @@
 var main = (function() {
     //private
-    var c = undefined, 
-        ctx = undefined,
-        crossHairArea = undefined,
-        asteroids = [];
+    var canvas = undefined,
+        ch = undefined, 
+        fired = true,
+        asteroids = [],
+        score = 0;
     
     //support func
     var getCursorPosition = function(e) {
@@ -19,53 +20,38 @@ var main = (function() {
             document.documentElement.scrollTop;
         }
 
-        var offset = c.offset();
-        x -= offset.left;
-        y -= offset.top;
-
         return {
             x: x,
             y: y,
         }
-    };
+    },
+    drawAst = function() {
+    },
+    fire = function(e) {
+        //draw laser
+        console.log('...');
+        $('#laser').show();
+        $('#laser').fadeOut('slow');
 
-    var drawAst = function() {
-    };
-    
-    //setting up game
-    var init = function() {
-        c = $('#testX');
-
-        if (!c) {
-            return;
-        }
-
-        c.click(function(e) {
-            var pos = getCursorPosition(e);
-            console.log(pos);
-            fire(pos.x, pos.y);
-        });
-    
-        //testing cross hair area
-
-    };
-
-    //game interaction func
-    var fire = function(x,y) {
-        if (!ctx) {
-            console.log('Not Init');
-        }
-        /*
-        if (x > 260 && y > 120 &&
-            x < 380 && y < 260) {
-            console.log("HIT");
-        }
-        */
         for (var i = 0; i < asteroids; i++) {
             var ast = asteroids[i];
-            if (ast) {
+            if (ast.css('top') > 120 && ast.css('left') > 260 &&
+                ast.css('top') < 180 && ast.css('left') < 320) {
+                ast.hit = true;
+                score += 100; //change 
             }
         }
+    };
+
+    //setting up game
+    var mainLoop = function() {
+        console.log("loop");
+        drawAst();
+    },
+    init = function() {
+        canvas = $('#canvas');
+        ch = $('#crossHair');
+        setInterval(mainLoop,32); //30fps
     };
 
     //public
@@ -77,5 +63,5 @@ var main = (function() {
 
 $(function() {
     //Testing. Draw red square, listen for click event, react
-    //main.init();
+    main.init();
 });

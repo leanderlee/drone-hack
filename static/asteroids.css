@@ -16,7 +16,7 @@
 	height: 68px;
 	margin: 50px auto;
 }
-#game {
+#canvas {
 	display: block;
 	position: relative;
 	width: 640px;
@@ -30,12 +30,24 @@
 	padding:10px;
 }
 .canvas {
+	z-index: 999;
 	width: 640px;
 	height: 360px;
 	border: 1px solid;
 	position: absolute;
 }
-.crossHair {
+#laser {
+	display: none;
+	z-index: 99999;
+	width: 2px;
+	height: 200px; 
+	position: absolute;
+	background: green;
+	top: 160px;
+	left: 320px;
+}
+#crossHair {
+	z-index: 9999;
 	width: 120px;
 	height: 120px;
 	position: absolute;
