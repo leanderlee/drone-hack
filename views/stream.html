@@ -12,6 +12,7 @@
   <canvas id='background'></canvas>
   <div id="content">
     <div id="logo"></div>
+<<<<<<< HEAD
     <div id="instructions"></div>
     <div id="help">?</div>
     <div id="canvas">
@@ -21,6 +22,17 @@
       <div id="laserR"></div>
       <div id="laserL"></div>
       <div id="droneStream" width="640" height="360" />
+=======
+      <div id="instructions"></div>
+      <div id="game">
+        <div id="help">?</div>
+        <div id="canvas">
+          <div id="crossHair"></div>
+          <div id="laser"></div>
+          <div id="droneStream" width="640" height="360" />
+        </div>
+      </div>
+>>>>>>> 9e863985f9da2fe3b8af299b161e27ca44873e3e
     </div>
     <audio id="laserSound" src="laser.wav" preload="auto"></audio>
     <audio id="blastSound" src="blast.wav" preload="auto"></audio>
@@ -107,6 +119,17 @@
       }
     }
 
+  </script>
+  <script>
+    $('#game').hide();
+    $('#instructions').click(function () {
+      $('#instructions').slideUp();
+      $('#game').slideDown();
+    });
+    $('#help').click(function () {
+      $('#game').slideUp();
+      $('#instructions').slideDown();
+    });
   </script>
 </body>
 </html>

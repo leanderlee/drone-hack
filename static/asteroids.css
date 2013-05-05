@@ -30,8 +30,8 @@
 }
 #instructions {
 	position: absolute;
-	top: -10px;
-	display: none;
+	top: 120px;
+	display: block;
 	background: url(/instructions.png) no-repeat;
 	width: 640px;
 	height: 350px;
@@ -133,6 +133,6 @@ left: -24px;
     height: 50px;
     position: absolute;
     background-image: url('/rock3.png');
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
 }
